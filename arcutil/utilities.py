@@ -65,11 +65,6 @@ def find_file_by_type(file_extension, directory=''):
         print('No {} file found'.format(file_extension))
         return targetfiles
 
-def matchHUC(string, HUCval=12):
-    """Return the first 12digit value within a string"""
-    match = re.search(r'\D(\d{' + str(HUCval) + '})(?!\d)', string)
-    return match.group(1)
-
 def str_iterable_to_SQLstr(iterable, field, copy_to_clipboard=True):
     """Take an iterable of strings, like a set or list, convert it to a formatted
     SQL OR selected string intended for ArcMap selection. The result will select

@@ -94,7 +94,10 @@ def collectMatchingFeatures(output_dir, output_gdb_name, input_fcs, field, vals,
             print('x')
 
 def add_mapping(field_name, mapping_existing, mapping_new):
-    """Adds field_name to mapping. Modified from: 
+    """Adds field_name to mapping. A helper function for
+    reorder_fields_by_fieldname and reorder_fields_by_index
+    
+    Modified from: 
         http://joshwerts.com/blog/2014/04/17/arcpy-reorder-fields/"""
     mapping_index = mapping_existing.findFieldMapIndex(field_name)
     # required fields (OBJECTID, etc) will not be in existing mappings
