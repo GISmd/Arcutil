@@ -2,38 +2,10 @@
 """
 Created on Tue Oct 31 13:03:31 2017
 
-@author: smmcdeid
+@author: mcdeid
 """
 import arcpy
 import os
-from contextlib import contextmanager
-
-@contextmanager
-def extension(name):
-    """ Safely use ArcGIS extensions """
-    if arcpy.CheckExtension(name) == u"Available":
-        status = arcpy.CheckOutExtension(name)
-        yield status
-    else:
-        raise RuntimeError("%s license isn't available" % name)
-
-    arcpy.CheckInExtension(name)
-
-@contextmanager
-def overwritestate(state):
-    """ Temporarily set the ``overwriteOutput`` env variable. """
-    orig_state = arcpy.env.overwriteOutput
-    arcpy.env.overwriteOutput = bool(state)
-    yield state
-    arcpy.env.overwriteOutput = orig_state
-
-@contextmanager
-def workspace(path):
-    """ Temporarily set the ``workspace`` env variable. """
-    orig_workspace = arcpy.env.workspace
-    arcpy.env.workspace = path
-    yield path
-    arcpy.env.workspace = orig_workspace
 
 def addrastertomxd(mxdpath, rasterlist):
     """Adds all the files in a list to the specified mxd.

@@ -2,7 +2,7 @@
 """
 Created on Thu Jun 30 09:28:06 2016
 
-@author: smmcdeid
+@author: mcdeid
 
 This module is a collection of useful utilities that I've put together from
 various sources (mostly stackoverflow). This module specifically avoids use
@@ -23,7 +23,6 @@ import re
 #import tkSimpleDialog
 
 '''http://gis.stackexchange.com/questions/158753/managing-environment-variables-in-arcpy/158754#158754'''
-
 
 def addtoclipboard(text):
     """Input needs to be string."""

@@ -11,8 +11,9 @@ For example:
 ```python
 import sys
 sys.path.append(r'C:/<Users>/<Username>/Github/Arcutil/arcutil')
-import utilities
-from arcpy_utilities import workspace
+import utilities as util
+import arcpy_utilities as arcutil
+from context import *
 
 #The rest of your code...
 ```
