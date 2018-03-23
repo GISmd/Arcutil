@@ -38,8 +38,7 @@ ehthumbs.db
 Thumbs.db
 *.ini
 
-# Directories #
+# Spyder #
 ###############
-data
-output
-old_manifests
+.spyproject
+.spyderworkspace
