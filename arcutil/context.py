@@ -4,9 +4,11 @@ Created on Fri Mar 23 10:57:51 2018
 
 @author: mcdeid
 
-Credit: nickrsan
+Credit: These functions were put together by Nick Santos 
+(https://github.com/nickrsan) after some community discussion in The Spatial
+Community (http://thespatialcommunity.org/).
 
-Arcpy context managers for temporarily checking out an extension, changing the 
+Description: Arcpy context managers for temporarily checking out an extension, changing the 
 overwrite state, and setting the arcpy workspace environment.
 """
 
