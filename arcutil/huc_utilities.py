@@ -16,7 +16,7 @@ def matchHUC(string, HUCval=12):
     return match.group(1)
 
 def clipdemsbyhuc(dems_to_clip, huc12shppath, hucfield='HUC_12', saveoutput_inplace=False,
-                  ext='.tif', postscript='_clp'):
+                  ext='.tif', postscript='_clp', HUCval=12):
     """Use matchHUC() to determine current HUC and make selection. This will
     save the output to the current arcpy workspace unless you set
     saveoutput_inplace to True.
@@ -29,8 +29,11 @@ def clipdemsbyhuc(dems_to_clip, huc12shppath, hucfield='HUC_12', saveoutput_inpl
         huc12shppath : str
             Path to polygon feature that contains HUC12 polygons.
         saveoutput_inplace : bool
-            False: Saves output to current arcpy workspace
-            True: Saves output at the location of the source raster"""
+            False saves output to current arcpy workspace. True saves output at
+            the location of the source raster.
+        HUCval : int
+            Are you wanting to match HUC12s? HUC8s? Put the integer value here
+            in `HUCval`"""
     start = datetime.datetime.now()
     clippeddems = []
     huc_lyr = arcpy.MakeFeatureLayer_management(huc12shppath, 'lyr')
@@ -45,7 +48,7 @@ def clipdemsbyhuc(dems_to_clip, huc12shppath, hucfield='HUC_12', saveoutput_inpl
             if saveoutput_inplace == True:
                 arcpy.env.workspace = head
     #        huc = huclist[i]
-            huc = matchHUC(head)
+            huc = matchHUC(head, HUCval)
             sql = '"' + hucfield + '" = \'' + str(huc) + '\''
 #            log.write(sql)
             arcpy.SelectLayerByAttribute_management('lyr',"NEW_SELECTION",sql)

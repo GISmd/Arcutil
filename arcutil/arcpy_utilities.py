@@ -105,6 +105,7 @@ def add_mapping(field_name, mapping_existing, mapping_new):
     if mapping_index != -1:
         field_map = mapping_existing.fieldMappings[mapping_index]
         mapping_new.addFieldMap(field_map)
+#    return mapping_new
 
 def reorder_fields_by_fieldname(table, out_table, field_order, add_missing=True):
     """Source: http://joshwerts.com/blog/2014/04/17/arcpy-reorder-fields/
@@ -150,8 +151,12 @@ def reorder_fields_by_index(table, out_table, field_order, add_missing=True):
             out_table if True. If False, do not append the missing fields"""
     fields_existing = arcpy.ListFields(table)
     field_names_existing = [field.name for field in fields_existing]
+#    field_names_new = []
+#    for i in field_order:
+#        field_names_new.append(field_names_existing[i])
     field_names_new = [field_names_existing[i] for i in field_order]
     mapping_existing = arcpy.FieldMappings()
+    mapping_existing.addTable(table)
     mapping_new = arcpy.FieldMappings()
     for field_name in field_names_new:
         if field_name not in field_names_existing:
@@ -164,7 +169,7 @@ def reorder_fields_by_index(table, out_table, field_order, add_missing=True):
             add_mapping(field_name, mapping_existing, mapping_new)
     # use merge with single input just to use new field_mappings
     arcpy.Merge_management(table, out_table, mapping_new)
-    return out_table
+#    return out_table, field_names_new, field_names_existing, mapping_new
 
 def update_mosaic_statistics(mosaic_dataset):
     arcpy.management.CalculateStatistics(mosaic_dataset)
