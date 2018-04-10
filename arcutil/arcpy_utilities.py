@@ -21,6 +21,13 @@ def addrastertomxd(mxdpath, rasterlist):
     mxd.save()
     del mxd
 
+def get_unique_values(layer, column_name):
+    """Returns a list of the unique values of a given field
+    
+    Ref: https://gis.stackexchange.com/questions/208430/trying-to-extract-a-list-of-unique-values-from-a-field-using-python"""
+    with arcpy.da.SearchCursor(layer, [column_name]) as cursor:
+        return sorted({row[0] for row in cursor})
+
 def validateFeatureClasses(fcs):
     """Take a list of feature classes (fcs), return False and the list of fcs
     that failed if failed. Otherwise return True and an empty list."""
