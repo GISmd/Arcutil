@@ -69,8 +69,6 @@ def collectMatchingFeatures(output_dir, output_gdb_name, input_fcs, field, vals,
     if validresult:
         if not output_gdb_name[-3:] == 'gdb':
             output_gdb_name += '.gdb'
-#        if not spatial_reference:
-#            spatial_reference = input_fcs[0]
         arcpy.CreateFileGDB_management(output_dir, output_gdb_name)
         lyrs = []
         for fc in input_fcs:
@@ -81,18 +79,18 @@ def collectMatchingFeatures(output_dir, output_gdb_name, input_fcs, field, vals,
             for val in vals:
                 print('{}'.format(val))
                 log.write('{}\n'.format(val))
-                where = ' "{}" = \'{}\' '.format(field,val)
+                where = '"{}" = \'{}\''.format(field,val)
                 log.write(where + '\n')
                 fd = arcpy.CreateFeatureDataset_management(os.path.join(output_dir,output_gdb_name),
                                                            val,sr)
                 for lyr in lyrs:
                     fc_out = os.path.join(fd[0],os.path.split(str(lyr))[1][:-4]+'_'+val)
                     log.write(fc_out + '\n')
-                    try:          
+                    try:    
                         arcpy.SelectLayerByAttribute_management(lyr,'NEW_SELECTION',where)
                         arcpy.CopyFeatures_management(lyr,fc_out)
                     except:
-                        log.write('arcpy.Select_analysis failed on {}\n'.format(fc))
+                        log.write('arcpy.Select_analysis failed on {}\n'.format(lyr))
                         continue
                     arcpy.SelectLayerByAttribute_management(lyr,'CLEAR_SELECTION')
     else:
