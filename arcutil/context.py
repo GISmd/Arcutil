@@ -23,7 +23,6 @@ def extension(name):
         yield status
     else:
         raise RuntimeError("%s license isn't available" % name)
-
     arcpy.CheckInExtension(name)
 
 @contextmanager
@@ -41,3 +40,14 @@ def workspace(path):
     arcpy.env.workspace = path
     yield path
     arcpy.env.workspace = orig_workspace
+
+@contextmanager
+def deconflict_scratchworkspace():
+    """ Check if scratchWorkspace is same as workspace, if it is, set
+    scratchWorkspace to scratchFolder location temporarily"""
+    orig_scratch = arcpy.env.scratchWorkspace
+    if orig_scratch == arcpy.env.workspace:
+        arcpy.env.scratchWorkspace = arcpy.env.scratchFolder
+    yield arcpy.env.scratchWorkspace
+    arcpy.env.scratchWorkspace = orig_scratch
+    
