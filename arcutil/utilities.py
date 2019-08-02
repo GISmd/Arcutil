@@ -17,8 +17,8 @@ import subprocess
 import math
 import win32clipboard
 import datetime
-import Tkinter
-import tkFileDialog
+# import Tkinter
+# import tkFileDialog
 import re
 #import tkSimpleDialog
 
@@ -48,11 +48,11 @@ def find_file_by_type(file_extension, directory=''):
         - """
     if not file_extension[0] == '.':
         file_extension = '.' + file_extension
-    if directory == '':
-        root = Tkinter.Tk()
-        directory = tkFileDialog.askdirectory(parent = root, initialdir = "/", title = 'Please Select a Directory')
-        root.withdraw()
-        os.chdir(directory)
+    # if directory == '':
+    #     root = Tkinter.Tk()
+    #     directory = tkFileDialog.askdirectory(parent = root, initialdir = "/", title = 'Please Select a Directory')
+    #     root.withdraw()
+    #     os.chdir(directory)
     targetfiles = []
     for root, dirs, filenames in os.walk(directory):
         for name in filenames:
