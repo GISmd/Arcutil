@@ -15,21 +15,25 @@ import collections
 import sys
 import subprocess
 import math
-import win32clipboard
 import datetime
 # import Tkinter
 # import tkFileDialog
 import re
 #import tkSimpleDialog
 
-'''http://gis.stackexchange.com/questions/158753/managing-environment-variables-in-arcpy/158754#158754'''
 
-def addtoclipboard(text):
-    """Input needs to be string."""
-    win32clipboard.OpenClipboard()
-    win32clipboard.EmptyClipboard()
-    win32clipboard.SetClipboardText(text)
-    win32clipboard.CloseClipboard()
+try:
+    import win32clipboard
+    def addtoclipboard(text):
+        """Input needs to be string."""
+        win32clipboard.OpenClipboard()
+        win32clipboard.EmptyClipboard()
+        win32clipboard.SetClipboardText(text)
+        win32clipboard.CloseClipboard()
+except:
+    print('Unable to import win32clipboard')
+
+'''http://gis.stackexchange.com/questions/158753/managing-environment-variables-in-arcpy/158754#158754'''
 
 def startdatetime():
     """Returns a string in format YYYYMMDD_HHMM"""
